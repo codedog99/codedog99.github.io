@@ -190,11 +190,11 @@
 <h6 id="5-plot-绘制坐标图"><a href="#5-plot-绘制坐标图" class="headerlink" title="5) plot()绘制坐标图"></a>5) plot()绘制坐标图</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, format_string, **kwargs)</span><br><span class="line">x : X轴数据，列表或数组，可选</span><br><span class="line">y : Y轴数据，列表或数组</span><br><span class="line">format_string: 控制曲线的格式字符串，由颜色字符、风格字符和标记字符组成，可选</span><br><span class="line">**kwargs : 第二组或更多(x,y,format_string)</span><br></pre></td></tr></table></figure>
 
 <p>颜色字符：</p>
-<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161348476.png" alt="image-20220110161348476"></p>
+<p><img src="F:\blog\work\blog\img\image-20220110161348476.png" alt="image-20220110161348476"></p>
 <p>风格字符：</p>
-<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161446037.png" alt="image-20220110161446037"></p>
+<p><img src="F:\blog\work\blog\img\image-20220110161446037.png" alt="image-20220110161446037"></p>
 <p>标记字符：</p>
-<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161502829.png" alt="image-20220110161502829"></p>
+<p><img src="F:\blog\work\blog\img\image-20220110161502829.png" alt="image-20220110161502829"></p>
 <h6 id="6）常见的图例接口函数"><a href="#6）常见的图例接口函数" class="headerlink" title="6）常见的图例接口函数"></a>6）常见的图例接口函数</h6><p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161851207.png" alt="image-20220110161851207"></p>
 <h6 id="7）图片保存"><a href="#7）图片保存" class="headerlink" title="7）图片保存"></a>7）图片保存</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此段函数应写在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">&quot;figure.jpg&quot;</span>)<span class="comment">#我这里填的是相对路径，如果想保存在指定文件夹下，填写绝对路径。</span></span><br></pre></td></tr></table></figure>
 
@@ -347,7 +347,7 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 <p>部署完成之后就会发现，原本空空的仓库多了一些文件，这也就是本地上传上去的文件了。<br><img src="https://img-blog.csdnimg.cn/cbb4603e05db49e48e76d03a2ecf66fa.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA566X5rOV5rGq,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br><strong>完结</strong><br>OK，到这里都没出现问题的话恭喜你，你已经成功搭建出属于自己的博客了，你前面设置的<strong>RepositoryName</strong>就是你的blog的URL路径哦（如我的为<a target="_blank" rel="noopener" href="https://codedog99.github.io/%EF%BC%89%E3%80%82">https://codedog99.github.io/）。</a><br><img src="https://img-blog.csdnimg.cn/4b5b48c5a3e744f8a44f02d07762b352.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA566X5rOV5rGq,size_20,color_FFFFFF,t_70,g_se,x_16" alt="请添加图片描述"><br>最后的最后，我们每一次更改配置文件_config.yml我们都需要重新部署到远端上，这个过程很简单，只需要三行命令：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean     #清除掉之前的</span><br><span class="line">hexo g		 #重新部署</span><br><span class="line">hexo s       #start</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean     #清除掉之前的</span><br><span class="line">hexo g		 #重新部署</span><br><span class="line">hexo d       #上传到远端</span><br></pre></td></tr></table></figure>
 
 
       
