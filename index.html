@@ -152,6 +152,128 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-使用matplotlib.pyplot绘图笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用matplotlib-pyplot绘图笔记"><a href="#使用matplotlib-pyplot绘图笔记" class="headerlink" title="使用matplotlib.pyplot绘图笔记"></a>使用matplotlib.pyplot绘图笔记</h1><h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>刚刚接触机器学习没多久，最近在忙着做一个图像处理的项目，在超参数选择和模型评估的时候为了更直观的选择出好的模型和超参数信息需要用到绘图工具，故而需要学习使用matplotlib库中的接口函数进行学习，以此笔记进行记录便于日后学习。</p>
+<p>特注：本笔记参考了以下网址内容进行学习，仅为个人学习需要并不用于任何商业通途</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/numpy/numpy-matplotlib.html">NumPy Matplotlib | 菜鸟教程 (runoob.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139052035">matplotlib.pyplot的使用总结大全（入门加进阶） - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/08b6660a8b79">Matplotlib基础教程 - 简书 (jianshu.com)</a></p>
+<h4 id="二、正文"><a href="#二、正文" class="headerlink" title="二、正文"></a>二、正文</h4><h5 id="1-字体设置（全局设置和局部设置）"><a href="#1-字体设置（全局设置和局部设置）" class="headerlink" title="1.字体设置（全局设置和局部设置）"></a>1.字体设置（全局设置和局部设置）</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rcParams的属性</span></span><br><span class="line">font.family   字体样式 <span class="string">&#x27;SimHei&#x27;</span> 黑体\<span class="string">&#x27;Kaiti&#x27;</span> 楷体\ <span class="string">&#x27;LiSu&#x27;</span> 隶书\ <span class="string">&#x27;FangSong&#x27;</span> 仿宋\ <span class="string">&#x27;STSong&#x27;</span> 宋体 等</span><br><span class="line">font.style   字体风格 <span class="string">&#x27;normal&#x27;</span>正常\<span class="string">&#x27;italic&#x27;</span>斜体</span><br><span class="line">font.size    字体大小</span><br><span class="line"><span class="comment"># 例：</span></span><br><span class="line">plt.rcParams[<span class="string">&quot;font.family&quot;</span>]=<span class="string">&quot;SimHei&quot;</span>   <span class="comment">#设置字体为中文黑体</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 局部设置：在需要设置中文字体的函数中添加属性fontproperties设置字体样式，内容同上</span></span><br><span class="line">fontproperties=<span class="string">&#x27;SimHei&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-常用接口函数"><a href="#2-常用接口函数" class="headerlink" title="2.常用接口函数"></a>2.常用接口函数</h5><h6 id="1）gridspec-GridSpec-设置网格"><a href="#1）gridspec-GridSpec-设置网格" class="headerlink" title="1）gridspec.GridSpec():设置网格"></a>1）gridspec.GridSpec():设置网格</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.gridspec <span class="keyword">as</span> gridspec  <span class="comment"># 导包</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, nrows, ncols, figure=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 left=<span class="literal">None</span>, bottom=<span class="literal">None</span>, right=<span class="literal">None</span>, top=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 wspace=<span class="literal">None</span>, hspace=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 width_ratios=<span class="literal">None</span>, height_ratios=<span class="literal">None</span></span>):</span></span><br><span class="line">nrows: 分格行数</span><br><span class="line">ncols: 分格列数</span><br><span class="line">figure：画布名称</span><br><span class="line">left,right,top,bottom: 默认即可</span><br><span class="line">wspace,hspace：列间距和行间距，一般默认即可</span><br></pre></td></tr></table></figure>
+
+<h6 id="2-figure-：创建一个画布"><a href="#2-figure-：创建一个画布" class="headerlink" title="2) figure()：创建一个画布"></a>2) figure()：创建一个画布</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">figure</span>(<span class="params">num=<span class="literal">None</span>,  <span class="comment"># autoincrement if None, else integer from 1-N</span></span></span></span><br><span class="line"><span class="params"><span class="function">           figsize=<span class="literal">None</span>,  <span class="comment"># defaults to rc figure.figsize</span></span></span></span><br><span class="line"><span class="params"><span class="function">           dpi=<span class="literal">None</span>,  <span class="comment"># defaults to rc figure.dpi</span></span></span></span><br><span class="line"><span class="params"><span class="function">           facecolor=<span class="literal">None</span>,  <span class="comment"># defaults to rc figure.facecolor</span></span></span></span><br><span class="line"><span class="params"><span class="function">           edgecolor=<span class="literal">None</span>,  <span class="comment"># defaults to rc figure.edgecolor</span></span></span></span><br><span class="line"><span class="params"><span class="function">           frameon=<span class="literal">True</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">           FigureClass=Figure,</span></span></span><br><span class="line"><span class="params"><span class="function">           clear=<span class="literal">False</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">           **kwargs</span></span></span><br><span class="line"><span class="params"><span class="function">           </span>):</span></span><br><span class="line"><span class="comment"># 参数：</span></span><br><span class="line">num: 画布的唯一标识符，可以为<span class="built_in">int</span>和<span class="built_in">str</span></span><br><span class="line">figsize: 画布的大小，英寸为单位  (<span class="built_in">float</span>,<span class="built_in">float</span>)</span><br><span class="line">dpi: 画布的分辨率，较少使用</span><br><span class="line">facecolor: 画布的背景色</span><br><span class="line">edgecolor： 画布的边界颜色</span><br><span class="line">frameon=<span class="literal">True</span>：默认为<span class="literal">True</span>,如果为false则禁止绘画图形框架</span><br><span class="line">clear=<span class="literal">False</span>: 默认为<span class="literal">False</span>，如果为<span class="literal">True</span>当图形已经存在时就会清除原画布</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 返回值</span></span><br><span class="line">返回值为一个画布对象，可以调用接口函数add_subplot()向画布中添加图表等</span><br></pre></td></tr></table></figure>
+
+<h6 id="3）添加子图"><a href="#3）添加子图" class="headerlink" title="3）添加子图"></a>3）添加子图</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">add_subplot(self, *args, **kwargs)：</span><br><span class="line">*arg：包括 rows、cols、index分别表示网格的行、列、以及添加子图的index</span><br><span class="line">其余参数见官方文档</span><br><span class="line">注意：add_subplot的返回值是一个子图的对象，子图可以调用scatter、plot、bar等函数画图</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用范例</span></span><br><span class="line">gs = gsp.GridSpec(nrows=<span class="number">5</span>,ncols=<span class="number">5</span>,right=<span class="number">1</span>)</span><br><span class="line">fig1=plt.figure(num=<span class="number">1</span>,frameon=<span class="literal">False</span>)</span><br><span class="line">ax=fig1.add_subplot(gs[<span class="number">0</span>:<span class="number">1</span>,:])   <span class="comment"># 使用gs设定网格</span></span><br><span class="line">ax.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">fig2 = plt.figure(num=<span class="number">1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h6 id="4）图像微调（在子图对象上实现微调）"><a href="#4）图像微调（在子图对象上实现微调）" class="headerlink" title="4）图像微调（在子图对象上实现微调）"></a>4）图像微调（在子图对象上实现微调）</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置刻度范围</span></span><br><span class="line">ax.set_xlim()</span><br><span class="line">ax.set_ylim()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置显示的刻度</span></span><br><span class="line">ax.set_xticks()</span><br><span class="line">ax.set_yticks()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置刻度标签</span></span><br><span class="line">ax.set_xticklabels()</span><br><span class="line">ax.set_yticklabels()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置刻度</span></span><br><span class="line">ax.tick_params()</span><br><span class="line"><span class="comment"># 参数：</span></span><br><span class="line">length: 刻度线长度，上面图里的刻度线长度，我设置的为<span class="number">6</span></span><br><span class="line">color: 刻度线颜色，上面图里的刻度线颜色，我设置的为“r”</span><br><span class="line">width： 刻度线宽度</span><br><span class="line">pad： 刻度线与刻度标签之间的间隔</span><br><span class="line">bottom, top, left, right四个参数对应四个边框，它们的取值为布尔类型，<span class="literal">True</span> 表示显示对应边框上的刻度线，<span class="literal">False</span>，代表不显示，默认<span class="literal">True</span></span><br><span class="line">labelbottom, labeltop, labelleft, labelright,与上面四个对应，代表的是四个边框上的类标的设置，取值为布尔类型，<span class="literal">True</span>代表显示对应边框上的类标，<span class="literal">False</span>代表不显示。</span><br><span class="line">labelsize：类标大小的设置参数，可取浮点型数值，也可去<span class="string">&quot;medium&quot;</span>,<span class="string">&quot;large&quot;</span>,<span class="string">&quot;small&quot;</span></span><br><span class="line">labelrotation：旋转类标一定的角度，与在set_xticklabels（）中的参数rotation作用相同。</span><br><span class="line"><span class="comment"># ---------------------范例代码-----------------</span></span><br><span class="line"><span class="comment">#设置刻度范围</span></span><br><span class="line">ax.set_xlim(<span class="number">1</span>,<span class="number">7.1</span>)<span class="comment">#x轴从1到7.1</span></span><br><span class="line">ax.set_ylim(<span class="number">40</span>,<span class="number">100</span>)<span class="comment">#y轴从40到100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置显示的刻度</span></span><br><span class="line">ax.set_xticks(np.linspace(<span class="number">1</span>,<span class="number">7</span>,<span class="number">7</span>))<span class="comment">#np.linspace()函数为等差数列,1至7的7个数组成的等差数列1,2，3,4，5,6，7，</span></span><br><span class="line">ax.set_yticks(np.linspace(<span class="number">50</span>,<span class="number">100</span>,<span class="number">6</span>))<span class="comment">#关于等差数列，想了解的可以参看numpy的用法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#设置刻度标签</span></span><br><span class="line">ax.set_xticklabels([<span class="string">&quot;星期一&quot;</span>,<span class="string">&quot;星期二&quot;</span>,<span class="string">&quot;星期三&quot;</span>,<span class="string">&quot;星期四&quot;</span>,<span class="string">&quot;星期五&quot;</span>,<span class="string">&quot;星期六&quot;</span>,<span class="string">&quot;星期日&quot;</span>],fontproperties=<span class="string">&quot;SimHei&quot;</span>\</span><br><span class="line">,fontsize=<span class="number">12</span>)</span><br><span class="line"><span class="comment">#这里用到了属性fontproperties可以单独设置x轴标签的字体，也可以用fontsize设置字体大小，还可以用color</span></span><br><span class="line"> 设置字的颜色</span><br><span class="line">ax.set_yticklebels([<span class="string">&quot;50kg&quot;</span>,<span class="string">&quot;60kg&quot;</span>,<span class="string">&quot;70kg&quot;</span>,<span class="string">&quot;80kg&quot;</span>,<span class="string">&quot;90kg&quot;</span>,<span class="string">&quot;100kg&quot;</span>],fontsize=<span class="number">12</span>)</span><br><span class="line"><span class="comment"># ---------------------范例代码结束-----------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置标签</span></span><br><span class="line">ax.set_xlabel()</span><br><span class="line">ax.set_ylabel()</span><br><span class="line"><span class="comment"># 设置标题</span></span><br><span class="line">ax.set_title()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数：</span></span><br><span class="line">fontsize：默认<span class="number">12</span>，可选参数还有[<span class="string">&#x27;xx-small&#x27;</span>, <span class="string">&#x27;x-small&#x27;</span>, <span class="string">&#x27;small&#x27;</span>, <span class="string">&#x27;medium&#x27;</span>, <span class="string">&#x27;large&#x27;</span>,<span class="string">&#x27;x-large&#x27;</span>, <span class="string">&#x27;xx-large&#x27;</span>]</span><br><span class="line">backgroundcolor：背景颜色</span><br><span class="line">fontweight：字体粗细，可选参数为[<span class="string">&#x27;light&#x27;</span>, <span class="string">&#x27;normal&#x27;</span>, <span class="string">&#x27;medium&#x27;</span>, <span class="string">&#x27;semibold&#x27;</span>, <span class="string">&#x27;bold&#x27;</span>, <span class="string">&#x27;heavy&#x27;</span>, <span class="string">&#x27;black&#x27;</span>]</span><br><span class="line">color：字体颜色</span><br><span class="line">fontstyle：设置字体类型，可选参数[ <span class="string">&#x27;normal&#x27;</span> | <span class="string">&#x27;italic&#x27;</span> | <span class="string">&#x27;oblique&#x27;</span> ]，italic斜体，oblique倾斜</span><br><span class="line">verticalalignment：设置水平对齐方式 ，可选参数 ： <span class="string">&#x27;center&#x27;</span> , <span class="string">&#x27;top&#x27;</span> , <span class="string">&#x27;bottom&#x27;</span> ,<span class="string">&#x27;baseline&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加图例</span></span><br><span class="line">ax.legend()</span><br><span class="line"><span class="comment"># 参数</span></span><br><span class="line">loc:可取<span class="string">&quot;best&quot;</span>,<span class="number">1</span>或者<span class="string">&quot;upper right&quot;</span>,<span class="number">2</span>或<span class="string">&quot;upper left&quot;</span>,<span class="number">3</span>或<span class="string">&quot;lower left&quot;</span>,<span class="number">4</span>或<span class="string">&quot;lower right&quot;</span>,代表放不同位置</span><br><span class="line">fontsize： <span class="built_in">int</span>或<span class="built_in">float</span>或&#123;‘xx-small’, ‘x-small’, ‘small’, ‘medium’, ‘large’, ‘x-large’, ‘xx-large’&#125;，字体大小</span><br><span class="line">shadow: 是否为图例边框添加阴影</span><br><span class="line">labelspacing: 图例中条目之间的距离</span><br><span class="line">handlelength: 图例句柄的长度</span><br></pre></td></tr></table></figure>
+
+<h6 id="5-plot-绘制坐标图"><a href="#5-plot-绘制坐标图" class="headerlink" title="5) plot()绘制坐标图"></a>5) plot()绘制坐标图</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, format_string, **kwargs)</span><br><span class="line">x : X轴数据，列表或数组，可选</span><br><span class="line">y : Y轴数据，列表或数组</span><br><span class="line">format_string: 控制曲线的格式字符串，由颜色字符、风格字符和标记字符组成，可选</span><br><span class="line">**kwargs : 第二组或更多(x,y,format_string)</span><br></pre></td></tr></table></figure>
+
+<p>颜色字符：</p>
+<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161348476.png" alt="image-20220110161348476"></p>
+<p>风格字符：</p>
+<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161446037.png" alt="image-20220110161446037"></p>
+<p>标记字符：</p>
+<p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161502829.png" alt="image-20220110161502829"></p>
+<h6 id="6）常见的图例接口函数"><a href="#6）常见的图例接口函数" class="headerlink" title="6）常见的图例接口函数"></a>6）常见的图例接口函数</h6><p><img src="C:\Users\86181\AppData\Roaming\Typora\typora-user-images\image-20220110161851207.png" alt="image-20220110161851207"></p>
+<h6 id="7）图片保存"><a href="#7）图片保存" class="headerlink" title="7）图片保存"></a>7）图片保存</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此段函数应写在show()函数之前</span></span><br><span class="line">plt.savefig(<span class="string">&quot;figure.jpg&quot;</span>)<span class="comment">#我这里填的是相对路径，如果想保存在指定文件夹下，填写绝对路径。</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/01/10/%E4%BD%BF%E7%94%A8matplotlib.pyplot%E7%BB%98%E5%9B%BE%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PCA 主成分分析法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="sklearn-decomposition-PCA方法的使用"><a href="#sklearn-decomposition-PCA方法的使用" class="headerlink" title="sklearn.decomposition.PCA方法的使用"></a>sklearn.decomposition.PCA方法的使用</h1><h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><p>主要用于非线性数据的降维，具体算法原理可以参考李航老师的《统计学习方法》中的介绍，内容非常详细，这里主要列举我遇到的问题和对该方法的使用。</p>
+<h4 id="二、应用"><a href="#二、应用" class="headerlink" title="二、应用"></a>二、应用</h4><p>最近在做一个关于高光谱图像处理的项目，由于数据通道数量庞大，对高维数据全部处理显然是不现实的，所以要做的第一件事就是数据降维，在这里我就使用了高光谱图像处理方法，下面是具体的编码工作以及编码思路</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/24/PCA%20%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -324,7 +446,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 John Doe
+    		&copy; 2022 John Doe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
